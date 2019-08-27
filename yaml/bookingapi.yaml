@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookingsvc
+spec:
+  selector:
+    app: booking
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-deploy
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: booking
+  template:
+    metadata:
+      labels:
+        app: booking
+    spec:           
+      containers:
+      - name: bookingapi
+        image: kanchanbhong/ezstaybookingsapi:latest        
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: ConnectionStrings__StorageConnection 
+        value : "DefaultEndpointsProtocol=https;AccountName=ezstaystoragegroup;AccountKey=K+0v7aNw5cpTdjSJ1qSk/IOH4SYojYdsbfbQ+XHcf4+JhO8t1N3S/pFePCpspQI24wLNJYiUoA0Hjjpgy7dIBw==;EndpointSuffix=core.windows.net"
+      #  - name: Jwt__Secret
+      #    value: "thisismylengthykeyforencryption"
+       # - name: Jwt__Issuer
+       #   value: "http://identitysvc"
+       # - name: Jwt__Audience
+       #   value: "http://eventsvc"

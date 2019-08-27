@@ -1,0 +1,86 @@
+<div class="jumbotron jumbotron-fluid" style="
+min-height: -webkit-fill-available;
+">
+    <div class="container">
+        <form [formGroup]="form" (submit)="searchHotels()" class="col-sm-12">
+            <div class="row">
+
+                <div class="col-sm-2" style="background-color:#aeafb1;">
+                    <div class="form-group">
+                        <label for="city">CITY</label>
+                        <select class="form-control" name="city" formControlName="city">
+                            <option>Pune</option>
+                            <option>Mumbai</option>
+                            <option>Hyderabad</option>
+                            <option>Delhi</option>
+                            <option>Goa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3" style="background-color:#aeafb1;">
+                    <div class="form-group">
+                        <label for="checkIn">CHECK-IN</label>
+                        <input class="form-control" type="date" name="checkIn" formControlName="checkIn">
+                    </div>
+                </div>
+                <div class="col-sm-3" style="background-color:#aeafb1;">
+                    <div class="form-group">
+                        <label for="checkOut">CHECK-OUT</label>
+                        <input class="form-control" type="date" name="checkOut" formControlName="checkOut">
+                    </div>
+                </div>
+                <div class="col-sm-1" style="background-color:#aeafb1;">
+                    <div class="form-group">
+                        <label for="rooms">ROOMS</label>
+                        <input class="form-control" id="ezStayGuests" type="number" name="rooms"
+                            formControlName="rooms">
+                    </div>
+                </div>
+                <div class="col-sm-1" style="background-color:#aeafb1;">
+                    <div class="form-group">
+                        <label for="guests">GUESTS</label>
+                        <input class="form-control" id="ezStayRooms" type="number" name="guests"
+                            formControlName="guests">
+                    </div>
+                </div>
+                <div class="col-sm-2" style="background-color:#aeafb1;">
+                    <button type="submit" name="search" style="margin-top: 29px;" class="btn btn-warning">
+                        SEARCH</button>
+                </div>
+
+            </div>
+        </form>
+        <div class="row">
+            <div class="container">
+                <!-- <p>{{hotels | json}}</p> -->
+                <div class="card">
+                    <article>
+                        <div class="row" *ngFor="let hotel of hotels">
+                            <div class="col-sm-4">
+                                <img [src]="hotel.hotelPhotoUrl" alt="No image found" style="
+                                height: 50;
+                                height: 170px;
+                                padding: 20px;
+                                width: 170px;
+                            ">
+                                <!--"../../assets/ezstayemptylogo.png"-->
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>{{hotel.name}}</h4>
+                                <h6>Ratings : {{hotel.rating}}</h6>
+                                <h6>City : {{hotel.city}}</h6>
+                                <h6>Address : {{hotel.address}}</h6>
+                                <h6>Contact : {{hotel.phone}}</h6>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-danger" style="margin-top: 29px;" type="button" (click)="bookHotel(hotel)">BOOK</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

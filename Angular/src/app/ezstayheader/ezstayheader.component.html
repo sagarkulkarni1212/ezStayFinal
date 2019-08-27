@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img src="../../assets/ezstaylogo.png" width="30" height="30"
+      class="d-inline-block align-top" alt="">
+    EZStay</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse float-right" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/']">HOME<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/bookings']">BOOKINGS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">PAYMENTS</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"></a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a [routerLink]="['/register']" class="dropdown-item">REGISTER</a>
+          <a [routerLink]="['/login']" class="dropdown-item">LOG-IN</a>
+          <div class="dropdown-divider"></div>
+          <a [routerLink]="['/']" class="dropdown-item" (click)="logOut()">LOG-OUT</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

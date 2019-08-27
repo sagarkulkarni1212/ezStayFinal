@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="container">
+        <!-- <p>{{hotels | json}}</p> -->
+        <div class="card">
+            <article>
+                <!-- <div class="row" *ngFor="let hotel of hotels"> -->
+                <div class="col-sm-4">
+                    <img [src]="hotel.hotelPhotoUrl" alt="No image found" style="
+                            height: 50;
+                            height: 170px;
+                            padding: 20px;
+                            width: 170px;
+                        ">
+                    <!--"../../assets/ezstayemptylogo.png"-->
+                </div>
+                <div class="col-sm-6">
+                    <h4>{{hotel.name}}</h4>
+                    <h6>Ratings : {{hotel.rating}}</h6>
+                    <h6>City : {{hotel.city}}</h6>
+                    <h6>Address : {{hotel.address}}</h6>
+                    <h6>Contact : {{hotel.phone}}</h6>
+                </div>
+                <div class="col-sm-2">
+                    <h6>Check-in : {{hotel.checkIn}}</h6>
+                    <h6>Check-out : {{hotel.checkOut}}</h6>
+                    <h6>Guests : {{hotel.guests}}</h6>
+                    <h6>Guests : {{hotel.noOfRooms}}</h6>
+                </div>
+                <!-- </div> -->
+            </article>
+        </div>
+
+    </div>
+</div>

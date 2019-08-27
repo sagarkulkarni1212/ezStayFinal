@@ -1,0 +1,84 @@
+#Demo2
+
+#Run below command one by one, Right click on line and select Run Line in Terminator (VS Code)
+
+# Login to Azure
+az login
+
+# Create a resource group
+az group create -n EZStayGroup -l westindia
+
+# Confirm group creation by listingit
+az group list -o table
+
+# Create Kubernetes clusters
+az aks create --name ezstaycluster --location southeastasia -g EZStayGroup --enable-addons monitoring --generate-ssh-keys  --node-count 1
+
+# Authenticate to K8S cluster
+az aks get-credentials -n ezstaycluster -g EZStayGroup
+
+
+#Create SQL Server SA Password as Secrete
+kubectl create  secret generic mssql --from-literal=SA_PASSWORD="Password@123"
+
+#Confirm above step 
+kubectl get secret
+
+# Create PVC
+kubectl apply -f ./yaml/sqlserver-pvc.yaml
+
+#Deploy sql server pod
+kubectl apply -f ./yaml/sqlserver-deploy.yaml
+
+# Get Pod
+kubectl get pod 
+
+#Deploy sql server service
+kubectl apply -f ./yaml/sqlserver-service.yaml
+
+#Check service is created or not (check till External IP is not generated)
+kubectl get svc
+
+#Deploy  service for event API
+kubectl apply -f ./yaml/hotelapi-service.yaml
+
+# Store the connection in the secrete (if required )
+
+#Deploy event service
+kubectl apply -f ./yaml/hotelapi-deploy.yaml
+
+#Check 
+kubectl get deploy
+
+
+##########For Identity api
+# created single yaml file for service and deploy , using --- (3 hypen) as a separator
+kubectl apply -f ./yaml/identityapi.yaml
+
+kubectl apply -f ./yaml/bookingapi.yaml
+
+#Get the logs 
+#kubectl logs <pod-name>
+kubectl logs event-deploy-68b97b66dc-7bptx
+
+# # Get the ip and check in chrome
+    #http://52.187.162.67/swagger/v1/swagger.json
+
+## To get details of service
+    kubectl get svc 
+
+
+# See everything on browser execute below commands 
+az aks browse  -n ezstaycluster -g EZStayGroup
+
+#Create RBAK for dashboard
+kubectl apply -f ./yaml/dashboard-admin.yaml
+
+
+
+#Deploy event service
+kubectl replace -f ./yaml/hotelapi-deploy.yaml
+
+#kubectl apply -f ./yaml/sqlserver-deploy.yaml
+
+kubectl replace -f ./yaml/identity-deploy.yaml
